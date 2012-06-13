@@ -1,0 +1,3 @@
+Thin QT wrapper around Sparkle and WinSparkle primarily meant to be used in Roxee products.
+Licensed under BSD2.
+Contains Sparkle and WinSparkle code.

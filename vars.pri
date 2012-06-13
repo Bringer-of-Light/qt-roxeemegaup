@@ -7,3 +7,4 @@ ADDITIONAL_DEPENDENCIES_DIR =
 ROXEE_DEPENDENCIES_DIR = $$PWD/third-party/Sparkle1.5b6
 #ROXEE_LINK_TYPE = static
 ROXEE_LINK_TYPE = dynamic
+TARGET = roxeemegaup

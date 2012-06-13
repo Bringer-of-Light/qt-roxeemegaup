@@ -15,16 +15,16 @@
 This library is primarily meant to be used by the Roxee Webrunner.
 Its purpose is to provide a clean, QT-ified, scriptable API that introduces as little extra complexity as possible over
 the underyling torrent library, and ideally, be API independent from that library.
-Right now though, it only supports (and is meant for) rasterbar libtorrent (http://www.rasterbar.com/products/libtorrent/).
+Right now though, it only supports (and is meant for) Sparkle and WinSparkle.
 
 To compile:
-- build or install rasterbar libtorrent (http://www.rasterbar.com/products/libtorrent/)
+- run bootstrap.sh or bootstrap.bat at the root of the project
 - edit the vars.pri file at the root of the project so that it matches your mileage:
- - DEPDIR=# should point to wherever your lib and include folders reside (under which libtorrent can be found)
- - DESTDIR=# should point to wherever you want the library to be compiled
+ - ROXEE_DEPENDENCIES_DIR=# should point to wherever your lib and include folders reside (under which (Win)Sparkle can be found)
+ - ROXEE_DESTDIR=# should point to wherever you want the library to be compiled
 - qmake, then make
 
-To use it, just create a RoxeeTorrent::Session object, possibly expose it inside your webkit and learn to swim.
+To use it, just create a RoxeeMegaUp::MegaUp object, possibly expose it inside your webkit and learn to swim.
 
 Big fat warning: this pile of code may or may not work for you. If it does, you may send a thank you note :).
 If it doesn't, you can probably:
@@ -41,7 +41,7 @@ This code is distributed under the terms of the BSD license.
 #define ROXEEMEGAUP_ROOT_H
 
 #include "libroxeemegaup_global.h"
-#include <QtCore/QObject>
+#include <QtCore/qobject.h>
 
 /*! \namespace RoxeeTorrent
 \brief The library namespace.

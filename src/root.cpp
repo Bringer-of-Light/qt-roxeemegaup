@@ -45,7 +45,7 @@ const QString Root::getLibName(){
     return QString::fromAscii("sparkle");
 #endif
 #ifdef Q_OS_WIN
-    return QString::fromAscii("win-sparkle");
+    return QString::fromAscii("winsparkle");
 #endif
 }
 

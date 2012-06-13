@@ -14,8 +14,7 @@
 
 #include "libroxeemegaup_global.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QtCore/qobject.h>
 
 #include "baseupdater.h"
 
@@ -24,7 +23,7 @@ namespace RoxeeMegaUp{
 class LIBROXEEMEGAUPSHARED_EXPORT MegaUp : public BaseUpdater
 {
     public:
-        MegaUp(const QString& url);
+        MegaUp(const QString& aUrl = NULL, const QString& companyName = NULL, const QString& appName = NULL, const QString& version = NULL);
         ~MegaUp();
 
         void checkForUpdates();

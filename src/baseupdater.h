@@ -12,7 +12,7 @@
 #ifndef ROXEEMEGAUP_BASEUPDATER_H
 #define ROXEEMEGAUP_BASEUPDATER_H
 
-#include <QtCore/QObject>
+#include <QtCore/qobject.h>
 
 class BaseUpdater: public QObject
 {

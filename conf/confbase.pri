@@ -1,5 +1,4 @@
 # Name of the target file (lowercase shit to avoid problems)
-TARGET = roxeemegaup
 INCNAME = lib$${TARGET}
 
 DEFINES += PROJECT_NAME=\\\"$${ROXEE_PROJECT_NAME}\\\"
@@ -29,7 +28,6 @@ message( -> Git revision $${ROXEE_GITVERSION} changeset number $${ROXEE_GITCHANG
 CONFIG(debug, debug|release){
     CONFIG -= release
     ROXEE_BUILD_TYPE = debug
-    TARGET = $${TARGET}-d
 }else{
     CONFIG -= debug declarative_debug
     ROXEE_BUILD_TYPE = release
@@ -117,3 +115,7 @@ unix{
 
 #INSTALLS += src
 DESTDIR = $${DESTDIR}/lib
+
+CONFIG(debug, debug|release){
+    TARGET = $${TARGET}-d
+}

@@ -1,0 +1,17 @@
+==========================================
+= FAT WARNING
+==========================================
+
+Binaries here are provided for convenience only.
+You SHOULD NOT use any precompiled binaries, and rather build it yourself, or at least get the binaries from the
+official websites.
+
+==========================================
+= Details
+==========================================
+
+http://winsparkle.org/
+http://sparkle.andymatuschak.org/
+
+The attacked Sparkle here is exactly the content of the official distributable - including link problem fixed by running the bootstrap.h link.
+WinSparkle has been built for Release from git master 20120613 using MSVC 2010.

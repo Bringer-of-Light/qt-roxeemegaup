@@ -23,10 +23,18 @@ namespace RoxeeMegaUp{
 class LIBROXEEMEGAUPSHARED_EXPORT MegaUp : public BaseUpdater
 {
     public:
-        MegaUp(const QString& aUrl = NULL, const QString& companyName = NULL, const QString& appName = NULL, const QString& version = NULL);
+        MegaUp(QObject * parent, const QString& aUrl = NULL, const QString& companyName = NULL, const QString& appName = NULL, const QString& version = NULL);
         ~MegaUp();
 
-        void checkForUpdates();
+        void checkNow(const bool silent = true);
+
+        Q_PROPERTY(const bool automatic READ getAutomatic WRITE setAutomatic)
+        Q_PROPERTY(const bool interval READ getAutomaticInterval WRITE setAutomaticInterval)
+
+        void setAutomatic(const bool val);
+        const bool getAutomatic();
+        void setAutomaticInterval(const int seconds);
+        const int getAutomaticInterval();
 
     private:
         class Private;

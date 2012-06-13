@@ -14,14 +14,15 @@
 \mainpage
 This library is primarily meant to be used by the Roxee Webrunner.
 Its purpose is to provide a clean, QT-ified, scriptable API that introduces as little extra complexity as possible over
-the underyling torrent library, and ideally, be API independent from that library.
+the underyling updater library, and ideally, be API independent from that library.
 Right now though, it only supports (and is meant for) Sparkle and WinSparkle.
 
 To compile:
-- run bootstrap.sh or bootstrap.bat at the root of the project
+- build both sparkle and winsparkle, or use the provided bynaries
 - edit the vars.pri file at the root of the project so that it matches your mileage:
  - ROXEE_DEPENDENCIES_DIR=# should point to wherever your lib and include folders reside (under which (Win)Sparkle can be found)
  - ROXEE_DESTDIR=# should point to wherever you want the library to be compiled
+ - pick a static or dynamic build (ROXEE_LINK_TYPE)
 - qmake, then make
 
 To use it, just create a RoxeeMegaUp::MegaUp object, possibly expose it inside your webkit and learn to swim.

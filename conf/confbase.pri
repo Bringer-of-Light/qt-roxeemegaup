@@ -55,8 +55,8 @@ DEFINES += PROJECT_LINKTYPE=\\\"$${ROXEE_LINK_TYPE}\\\"
 
 message( -> Building a $${ROXEE_LINK_TYPE} version)
 
-win32-msvc{
-    ROXEE_COMPILER=win-msvc
+win32-msvc2010{
+    ROXEE_COMPILER=win-msvc2010
 }
 win32-g++{
     ROXEE_COMPILER=win-ming

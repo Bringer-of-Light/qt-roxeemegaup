@@ -25,7 +25,8 @@ class MegaUp::Private
 		SUUpdater* updater;
 };
 
-MegaUp::MegaUp(const QString& aUrl, const QString& companyName, const QString& appName, const QString& version)
+MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& companyName, const QString& appName, const QString& version):
+    QObject(parent)
 {
     qDebug() << "     +++ [Lib] {MegaUp}: constructor";
 
@@ -50,11 +51,13 @@ MegaUp::~MegaUp()
 	delete d;
 }
 
-void MegaUp::checkForUpdates()
+void MegaUp::checkNow(const bool silent)
 {
     qDebug() << "     *** [Lib] {MegaUp}: check for updates";
-    [d->updater checkForUpdatesInBackground];
-//    [d->updater checkForUpdates];
+    if(silent)
+        [d->updater checkForUpdates];
+    else
+        [d->updater checkForUpdatesInBackground];
 }
 
 

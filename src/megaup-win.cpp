@@ -17,106 +17,56 @@
 
 namespace RoxeeMegaUp{
 
-MegaUp::MegaUp(const QString& aUrl, const QString& companyName, const QString& appName, const QString& version)
+MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& companyName, const QString& appName, const QString& version):
+    BaseUpdater(parent)
 {
     qDebug() << "     +++ [Lib] {MegaUp}: constructor";
-//        Before calling win_sparkle_init(), you must set appcast URL with win_sparkle_set_appcast_url():
-//    win_sparkle_set_automatic_check_for_updates(1);
-    if(aUrl){
+    if(aUrl.length()){
         win_sparkle_set_appcast_url(aUrl.toStdString().c_str());
     }
 
-    if(companyName){
-        win_sparkle_set_app_details(companyName.toStdWString(), appName.toStdWString(), appVersion.toStdWString());
+    if(companyName.length()){
+        const wchar_t * cn = companyName.toStdWString().c_str();
+        const wchar_t * an = appName.toStdWString().c_str();
+        const wchar_t * v = version.toStdWString().c_str();
+        win_sparkle_set_app_details(cn, an, v);
     }
+    win_sparkle_init();
 }
 
 MegaUp::~MegaUp()
 {
-    qDebug() << "     --- [Lib] {MegaUp}: constructor";
+    qDebug() << "     --- [Lib] {MegaUp}: destructor";
 //        Finally, you should shut WinSparkle down cleanly when the app exits:
     win_sparkle_cleanup();
 }
 
-void MegaUp::checkForUpdates()
+void MegaUp::checkNow(const bool silent)
 {
 // Initialize WinSparkle as soon as the app itself is initialized, right
 // before entering the event loop:
     qDebug() << "     *** [Lib] {MegaUp}: check for updates";
-    win_sparkle_init();
-//    win_sparkle_check_update_with_ui();
+    win_sparkle_check_update_with_ui();
+}
+
+void MegaUp::setAutomatic(const bool val)
+{
+    win_sparkle_set_automatic_check_for_updates(val ? 1 : 0);
+}
+
+const bool MegaUp::getAutomatic()
+{
+    return (win_sparkle_get_automatic_check_for_updates() == 1) ? true : false;
+}
+
+void MegaUp::setAutomaticInterval(const int seconds)
+{
+    win_sparkle_set_update_check_interval(seconds);
+}
+
+const int MegaUp::getAutomaticInterval()
+{
+    return win_sparkle_get_update_check_interval();
 }
 
 }
-
-
-
-
-///**
-//    Sets whether updates are checked automatically or only through a manual call.
-
-//    If disabled, win_sparkle_check_update_with_ui() must be used explicitly.
-
-//    @param  state  1 to have updates checked automatically, 0 otherwise
-
-//    @since 0.4
-// */
-//WIN_SPARKLE_API void win_sparkle_set_automatic_check_for_updates(int state);
-
-///**
-//    Gets the automatic update checking state
-
-//    @return  1 if updates are set to be checked automatically, 0 otherwise
-
-//    @note Defaults to 0 when not yet configured (as happens on first start).
-
-//    @since 0.4
-// */
-//WIN_SPARKLE_API int win_sparkle_get_automatic_check_for_updates();
-
-///**
-//    Sets the automatic update interval.
-
-//    @param  interval The interval in seconds between checks for updates.
-//                     The minimum update interval is 3600 seconds (1 hour).
-
-//    @since 0.4
-// */
-//WIN_SPARKLE_API void win_sparkle_set_update_check_interval(int interval);
-
-///**
-//    Gets the automatic update interval in seconds.
-
-//    Default value is one day.
-
-//    @since 0.4
-// */
-//WIN_SPARKLE_API int win_sparkle_get_update_check_interval();
-
-////@}
-
-
-///*--------------------------------------------------------------------------*
-//                              Manual usage
-// *--------------------------------------------------------------------------*/
-
-///**
-//    @name Manually using WinSparkle
-// */
-////@{
-
-///**
-//    Checks if an update is available, showing progress UI to the user.
-
-//    Normally, WinSparkle checks for updates on startup and only shows its UI
-//    when it finds an update. If the application disables this behavior, it
-//    can hook this function to "Check for updates..." menu item.
-
-//    When called, background thread is started to check for updates. A small
-//    window is shown to let the user know the progress. If no update is found,
-//    the user is told so. If there is an update, the usual "update available"
-//    window is shown.
-
-//    This function returns immediately.
-// */
-//WIN_SPARKLE_API void win_sparkle_check_update_with_ui();

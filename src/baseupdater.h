@@ -18,9 +18,10 @@ class BaseUpdater: public QObject
 {
     Q_OBJECT
 	public:
+        explicit BaseUpdater(QObject * parent): QObject(parent){}
         virtual ~BaseUpdater(){}
 
-        Q_INVOKABLE virtual void checkForUpdates() = 0;
+        Q_INVOKABLE virtual void checkNow(const bool silent = true) = 0;
 };
 
 #endif // ROXEEMEGAUP_BASEUPDATER_H

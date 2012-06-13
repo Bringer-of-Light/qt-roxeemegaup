@@ -11,6 +11,10 @@
 
 #include "root.h"
 
+#ifdef Q_OS_WIN
+#include <winsparkle-version.h>
+#endif
+
 /*! \cond */
 
 namespace RoxeeMegaUp{
@@ -55,7 +59,7 @@ const QString Root::getLibVersion(){
     return QString::fromAscii("1");
 #endif
 #ifdef Q_OS_WIN
-    return QString::fromAscii(WIN_SPARKLE_VERSION_MAJOR);
+    return QString::number(WIN_SPARKLE_VERSION_MAJOR);
 #endif
 }
 
@@ -65,7 +69,7 @@ const QString Root::getLibRevision(){
     return QString::fromAscii("5b6");
 #endif
 #ifdef Q_OS_WIN
-    return QString::fromAscii(WIN_SPARKLE_VERSION_MINOR);
+    return QString::number(WIN_SPARKLE_VERSION_MINOR);
 #endif
 }
 

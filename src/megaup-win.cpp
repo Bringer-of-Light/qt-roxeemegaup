@@ -18,7 +18,7 @@
 namespace RoxeeMegaUp{
 
 MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& companyName, const QString& appName, const QString& version):
-    BaseUpdater(parent)
+    QObject(parent)
 {
     qDebug() << "     +++ [Lib] {MegaUp}: constructor";
     if(aUrl.length()){

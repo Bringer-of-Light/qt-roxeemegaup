@@ -25,7 +25,7 @@ class MegaUp::Private
 		SUUpdater* updater;
 };
 
-MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& companyName, const QString& appName, const QString& version):
+MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& /*companyName*/, const QString& /*appName*/, const QString& /*version*/):
     QObject(parent)
 {
     qDebug() << "     +++ [Lib] {MegaUp}: constructor";
@@ -42,6 +42,16 @@ MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& companyName
                 [NSString stringWithUTF8String: aUrl.toUtf8().data()]];
         [d->updater setFeedURL: url];
     }
+
+    // Unfortunately, it's not possible to specify any of the additional parameters
+
+    // XXX these are obviously not implemented on windows, so, not a separate / activable method for now
+    //- (void)setSendsSystemProfile:(BOOL)sendsSystemProfile;
+    //- (BOOL)sendsSystemProfile;
+    [d->updater setSendsSystemProfile: true];
+    //- (void)setAutomaticallyDownloadsUpdates:(BOOL)automaticallyDownloadsUpdates;
+    //- (BOOL)automaticallyDownloadsUpdates;
+    [d->updater setAutomaticallyDownloadsUpdates: true];
 }
 
 MegaUp::~MegaUp()
@@ -55,57 +65,33 @@ void MegaUp::checkNow(const bool silent)
 {
     qDebug() << "     *** [Lib] {MegaUp}: check for updates";
     if(silent)
-        [d->updater checkForUpdates];
-    else
         [d->updater checkForUpdatesInBackground];
+    else
+        [d->updater checkForUpdates: 0];
 }
 
 
+void MegaUp::setAutomatic(const bool val)
+{
+    qDebug() << "     *** [Lib] {MegaUp}: set automatic update checking";
+    [d->updater setAutomaticallyChecksForUpdates: val];
+}
 
-//- (void)setAutomaticallyChecksForUpdates:(BOOL)automaticallyChecks;
-//- (BOOL)automaticallyChecksForUpdates;
+const bool MegaUp::getAutomatic()
+{
+    return [d->updater automaticallyChecksForUpdates];
+}
 
-//- (void)setUpdateCheckInterval:(NSTimeInterval)interval;
-//- (NSTimeInterval)updateCheckInterval;
+void MegaUp::setAutomaticInterval(const int seconds)
+{
+    qDebug() << "     *** [Lib] {MegaUp}: set automatic update time interval";
+    [d->updater setUpdateCheckInterval: seconds];
+}
 
-//- (void)setSendsSystemProfile:(BOOL)sendsSystemProfile;
-//- (BOOL)sendsSystemProfile;
-
-//- (void)setAutomaticallyDownloadsUpdates:(BOOL)automaticallyDownloadsUpdates;
-//- (BOOL)automaticallyDownloadsUpdates;
-
-
-
-//// This IBAction is meant for a main menu item. Hook up any menu item to this action,
-//// and Sparkle will check for updates and report back its findings through UI.
-//- (IBAction)checkForUpdates:sender;
-
-//// This kicks off an update meant to be programmatically initiated. That is,
-//// it will display no UI unless it actually finds an update, in which case it
-//// proceeds as usual. If the automated downloading is turned on, however,
-//// this will invoke that behavior, and if an update is found, it will be
-//// downloaded and prepped for installation.
-//- (void)checkForUpdatesInBackground;
-
-//// This begins a "probing" check for updates which will not actually offer to
-//// update to that version. The delegate methods, though, (up to updater:didFindValidUpdate:
-//// and updaterDidNotFindUpdate:), are called, so you can use that information in your UI.
-//// Essentially, you can use this to UI-lessly determine if there's an update.
-//- (void)checkForUpdateInformation;
-
-//// Date of last update check. Returns null if no check has been performed.
-//- (NSDate *)lastUpdateCheckDate;
-
-//// Call this to appropriately schedule or cancel the update checking timer according
-//// to the preferences for time interval and automatic checks. If this SUUpdater instance
-//// was not present during the application's launch, you must call this method to start
-//// the update cycle explicitly.
-//- (void)resetUpdateCycle;
-
-//- (BOOL)updateInProgress;
-
-//- (void)setDelegate:(id)delegate; // See below for more information on the delegate.
-//- delegate;
+const int MegaUp::getAutomaticInterval()
+{
+    return [d->updater updateCheckInterval];
+}
 
 
 }

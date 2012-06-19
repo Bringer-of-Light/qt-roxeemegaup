@@ -50,10 +50,7 @@ SOURCES += \
 HEADERS += \
     libroxeemegaup_global.h \
     root.h \
-    baseupdater.h \
     megaup.h
-
-#DEFINES += APPCAST=\\\"$${APPCAST}\\\"
 
 macx {
     HEADERS +=              cocoainit.h

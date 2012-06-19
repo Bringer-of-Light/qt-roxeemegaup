@@ -14,4 +14,5 @@ OTHER_FILES += vars.pri.in \
     res/redist/ChangeLog \
     res/redist/LICENSE.BSD2 \
     README \
-    bootstrap.sh
+    third-party/README \
+    third-party/bootstrap.sh

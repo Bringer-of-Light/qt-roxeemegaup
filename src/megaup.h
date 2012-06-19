@@ -16,20 +16,19 @@
 
 #include <QtCore/qobject.h>
 
-#include "baseupdater.h"
-
 namespace RoxeeMegaUp{
 
-class LIBROXEEMEGAUPSHARED_EXPORT MegaUp : public BaseUpdater
+class LIBROXEEMEGAUPSHARED_EXPORT MegaUp : public QObject
 {
+    Q_OBJECT
     public:
         MegaUp(QObject * parent, const QString& aUrl = NULL, const QString& companyName = NULL, const QString& appName = NULL, const QString& version = NULL);
         ~MegaUp();
 
-        void checkNow(const bool silent = true);
+        Q_INVOKABLE void checkNow(const bool silent = true);
 
         Q_PROPERTY(const bool automatic READ getAutomatic WRITE setAutomatic)
-        Q_PROPERTY(const bool interval READ getAutomaticInterval WRITE setAutomaticInterval)
+        Q_PROPERTY(const int interval READ getAutomaticInterval WRITE setAutomaticInterval)
 
         void setAutomatic(const bool val);
         const bool getAutomatic();

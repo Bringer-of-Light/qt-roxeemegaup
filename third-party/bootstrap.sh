@@ -1,12 +1,23 @@
 #!/bin/sh
 
-SRC_DIR=andymatuschak-Sparkle-9eb4368
-BUILD_DIR=Sparkle1.5b6
+if [[ "$1" != "" ]]; then
+    type=master
+    SRC_DIR=SparkleMaster
+    BUILD_DIR=Sparkle1.X
+else
+    type=release
+    SRC_DIR=andymatuschak-Sparkle-9eb4368
+    BUILD_DIR=Sparkle1.5b6
+fi
 
 download(){
-    curl https://nodeload.github.com/andymatuschak/Sparkle/tarball/sparkle-1.5b6 > temp.tar.gz
-    tar -xzf temp.tar.gz
-    rm temp.tar.gz
+    if [[ "$type" == "master" ]]; then
+        git clone https://github.com/andymatuschak/Sparkle.git SparkleMaster
+    else
+        curl https://nodeload.github.com/andymatuschak/Sparkle/tarball/sparkle-1.5b6 > temp.tar.gz
+        tar -xzf temp.tar.gz
+        rm temp.tar.gz
+    fi
 }
 
 build(){
@@ -22,9 +33,8 @@ build(){
 }
 
 fixbuild(){
-    cd ${BUILD_DIR}/Sparkle.framework/Headers/
-
 # Fix broken includes
+    cd ${BUILD_DIR}/Sparkle.framework/Headers/
     ln -s ../Headers Sparkle
     cd -
 
@@ -35,6 +45,14 @@ fixbuild(){
     ln -s fr.lproj fr_CA.lproj
     cd -
 }
+
+relink(){
+    if [[ -e Sparkle  ]]; then
+        rm Sparkle
+    fi
+    ln -s ${BUILD_DIR} Sparkle
+}
+
 
 if [ ! -d "$SRC_DIR" ]; then
     echo "Downloading"
@@ -50,3 +68,5 @@ if [ ! -d "$BUILD_DIR" ]; then
 else
     echo "Already built. If you want to rebuild, rm -Rf ${BUILD_DIR}"
 fi
+
+relink

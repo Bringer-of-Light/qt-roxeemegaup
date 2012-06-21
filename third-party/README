@@ -14,4 +14,4 @@ http://winsparkle.org/
 http://sparkle.andymatuschak.org/
 
 The attacked Sparkle here has been built using the bootstrap.sh script.
-WinSparkle has been built from git master 20120613 using MSVC 2010, Release, /Zc:wchar_t-.
+WinSparkle has been built from git master 20120613 using MSVC 2010, Release, /Zc:wchar_t-

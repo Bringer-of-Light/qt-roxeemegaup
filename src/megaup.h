@@ -31,9 +31,9 @@ class LIBROXEEMEGAUPSHARED_EXPORT MegaUp : public QObject
         Q_PROPERTY(const int interval READ getAutomaticInterval WRITE setAutomaticInterval)
 
         void setAutomatic(const bool val);
-        const bool getAutomatic();
+        bool getAutomatic();
         void setAutomaticInterval(const int seconds);
-        const int getAutomaticInterval();
+        int getAutomaticInterval();
 
     private:
         class Private;

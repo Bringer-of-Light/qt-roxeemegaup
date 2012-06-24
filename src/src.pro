@@ -62,6 +62,10 @@ win32 {
     SOURCES += megaup-win.cpp
 }
 
+!macx:!win32{
+    SOURCES += megaup-other.cpp
+}
+
 unix{
     system(mkdir -p $${DESTDIR}/../Frameworks)
     system(ln -s $${PWD}/../third-party/Sparkle1.5b6/Sparkle.framework $${DESTDIR}/../Frameworks)

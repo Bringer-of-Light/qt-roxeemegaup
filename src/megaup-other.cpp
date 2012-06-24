@@ -11,62 +11,45 @@
 
 #include "megaup.h"
 
-#include <winsparkle.h>
-
 #include <QtCore/qdebug.h>
 
 namespace RoxeeMegaUp{
 
-MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& companyName, const QString& appName, const QString& version):
+MegaUp::MegaUp(QObject * parent, const QString& /*aUrl*/, const QString& /*companyName*/, const QString& /*appName*/, const QString& /*version*/):
     QObject(parent)
 {
     qDebug() << "     +++ [Lib] {MegaUp}: constructor";
-    if(aUrl.length()){
-        win_sparkle_set_appcast_url(aUrl.toStdString().c_str());
-    }
-
-    if(companyName.length()){
-        const wchar_t * cn = companyName.toStdWString().c_str();
-        const wchar_t * an = appName.toStdWString().c_str();
-        const wchar_t * v = version.toStdWString().c_str();
-        win_sparkle_set_app_details(cn, an, v);
-    }
-    win_sparkle_init();
 }
 
 MegaUp::~MegaUp()
 {
     qDebug() << "     --- [Lib] {MegaUp}: destructor";
 //        Finally, you should shut WinSparkle down cleanly when the app exits:
-    win_sparkle_cleanup();
 }
 
-void MegaUp::checkNow(const bool silent)
+void MegaUp::checkNow(const bool /*silent*/)
 {
 // Initialize WinSparkle as soon as the app itself is initialized, right
 // before entering the event loop:
     qDebug() << "     *** [Lib] {MegaUp}: check for updates";
-    win_sparkle_check_update_with_ui();
 }
 
-void MegaUp::setAutomatic(const bool val)
+void MegaUp::setAutomatic(const bool /*val*/)
 {
-    win_sparkle_set_automatic_check_for_updates(val ? 1 : 0);
 }
 
 bool MegaUp::getAutomatic()
 {
-    return (win_sparkle_get_automatic_check_for_updates() == 1) ? true : false;
+    return 0;
 }
 
-void MegaUp::setAutomaticInterval(const int seconds)
+void MegaUp::setAutomaticInterval(const int /*seconds*/)
 {
-    win_sparkle_set_update_check_interval(seconds);
 }
 
 int MegaUp::getAutomaticInterval()
 {
-    return win_sparkle_get_update_check_interval();
+    return 0;
 }
 
 }

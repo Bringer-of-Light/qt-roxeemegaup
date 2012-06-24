@@ -77,7 +77,7 @@ void MegaUp::setAutomatic(const bool val)
     [d->updater setAutomaticallyChecksForUpdates: val];
 }
 
-const bool MegaUp::getAutomatic()
+bool MegaUp::getAutomatic()
 {
     return [d->updater automaticallyChecksForUpdates];
 }
@@ -88,7 +88,7 @@ void MegaUp::setAutomaticInterval(const int seconds)
     [d->updater setUpdateCheckInterval: seconds];
 }
 
-const int MegaUp::getAutomaticInterval()
+int MegaUp::getAutomaticInterval()
 {
     return [d->updater updateCheckInterval];
 }

@@ -51,9 +51,10 @@ const QString Root::getChangeset(){
 const QString Root::getLibName(){
 #ifdef Q_OS_MAC
     return QString::fromAscii("sparkle");
-#endif
-#ifdef Q_OS_WIN
+#elif Q_OS_WIN
     return QString::fromAscii("winsparkle");
+#else
+    return QString::fromAscii("");
 #endif
 }
 
@@ -61,9 +62,10 @@ const QString Root::getLibVersion(){
 #ifdef Q_OS_MAC
     // XXX should better read the info.plist
     return QString::fromAscii("1");
-#endif
-#ifdef Q_OS_WIN
+#elif Q_OS_WIN
     return QString::number(WIN_SPARKLE_VERSION_MAJOR);
+#else
+    return QString::fromAscii("");
 #endif
 }
 
@@ -71,9 +73,10 @@ const QString Root::getLibRevision(){
 #ifdef Q_OS_MAC
     // XXX should better read the info.plist
     return QString::fromAscii("5b6");
-#endif
-#ifdef Q_OS_WIN
+#elif Q_OS_WIN
     return QString::number(WIN_SPARKLE_VERSION_MINOR);
+#else
+    return QString::fromAscii("");
 #endif
 }
 

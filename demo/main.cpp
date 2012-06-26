@@ -9,27 +9,28 @@
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <AppKit/AppKit.h>
-#include "cocoainit.h"
-#include <QtCore/qdebug.h>
+#include <QtCore/QDebug>
+#include <QtGui/QApplication>
+#include <libroxeemegaup/megaup.h>
+#include <libroxeemegaup/root.h>
 
-class CocoaInitializer::Private
-{
-	public:
-		NSAutoreleasePool* autoReleasePool;
-};
 
-CocoaInitializer::CocoaInitializer()
+int main(int argc, char *argv[])
 {
-    qDebug() << "     +++ [Lib] {MegaUp}: cocoa initializer";
-    d = new CocoaInitializer::Private();
-	NSApplicationLoad();
-	d->autoReleasePool = [[NSAutoreleasePool alloc] init];
+    QApplication app(argc, argv);
+
+    RoxeeMegaUp::MegaUp * updater;
+    RoxeeMegaUp::Root * updaterRoot;
+
+    QObject * r = new QObject;
+    QString u = QString::fromAscii("http://app.roxee.net/webroxer/appcast.xml");
+    updater = new RoxeeMegaUp::MegaUp(r, u, updaterRoot->getVendor(), updaterRoot->getName(), updaterRoot->getVersion());
+    updater->setAutomatic(true);
+    updater->setAutomaticInterval(3600 * 24);
+    updaterRoot = new RoxeeMegaUp::Root();
+
+    int a;
+    a = app.exec();
+    return a;
 }
 
-CocoaInitializer::~CocoaInitializer()
-{
-    qDebug() << "     +++ [Lib] {MegaUp}: cocoa release";
-    [d->autoReleasePool release];
-	delete d;
-}

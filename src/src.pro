@@ -1,23 +1,18 @@
 # Basic consumer variables
 include(../vars.pri)
 
-# This is a library (to be ovveridden by eg MSVC specific config)
-TEMPLATE = lib
-
 # Requires only core
 QT = core
 
-# And be boring
-CONFIG +=   QT_NO_CAST_FROM_ASCII \
-            QT_NO_CAST_TO_ASCII \
-            QT_STRICT_ITERATORS \
-            QT_USE_FAST_CONCATENATION QT_USE_FAST_OPERATOR_PLUS
-
-# Yes, this will build a lib
+# Build a lib
+TEMPLATE = lib
 DEFINES += LIBROXEEMEGAUP_LIBRARY
 
 # Basic stuff (version and build/path magic)
 include(../conf/confbase.pri)
+
+# Third-party stuff
+include(../third-party/bootstrap.pri)
 
 # Windows specific configuration
 win32{
@@ -33,26 +28,22 @@ mac{
 
 # Unix specific configuration
 unix:!mac {
-    message( -> Targetting linux)
+    message( -> Targetting *nux)
     include(../conf/confunix.pri)
 }
 
 INCLUDEPATH += $$PWD
+INCLUDEPATH += $$PWD/include/libroxeemegaup
 target.path = $$DESTDIR
 INSTALLS += target
 
-CONFIG += absolute_library_soname
+SOURCES +=  root.cpp
 
-#LIBROXEESINAPPSHARED_EXPORT
-SOURCES += \
-    root.cpp
+HEADERS +=  include/libroxeemegaup/libroxeemegaup_global.h \
+            include/libroxeemegaup/root.h \
+            include/libroxeemegaup/megaup.h
 
-HEADERS += \
-    libroxeemegaup_global.h \
-    root.h \
-    megaup.h
-
-macx {
+mac {
     HEADERS +=              cocoainit.h
     OBJECTIVE_SOURCES +=    cocoainit.mm
     OBJECTIVE_SOURCES +=    megaup-mac.mm
@@ -62,11 +53,7 @@ win32 {
     SOURCES += megaup-win.cpp
 }
 
-!macx:!win32{
+!mac:!win32{
     SOURCES += megaup-other.cpp
 }
 
-unix{
-    system(mkdir -p $${DESTDIR}/../Frameworks)
-    system(ln -s $${PWD}/../third-party/Sparkle1.5b6/Sparkle.framework $${DESTDIR}/../Frameworks)
-}

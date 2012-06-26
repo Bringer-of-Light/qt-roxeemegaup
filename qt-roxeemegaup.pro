@@ -6,7 +6,7 @@ lessThan(QT_VERSION, 4.8) {
 # Explore subdirs in order
 TEMPLATE = subdirs
 CONFIG = ordered
-SUBDIRS = src
+SUBDIRS = src demo
 
 OTHER_FILES += vars.pri.in \
     res/doxygen.tpl \
@@ -15,4 +15,5 @@ OTHER_FILES += vars.pri.in \
     res/redist/LICENSE.BSD2 \
     README \
     third-party/README \
+    third-party/bootstrap.pri \
     third-party/bootstrap.sh

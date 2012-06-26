@@ -24,13 +24,10 @@ MegaUp::MegaUp(QObject * parent, const QString& /*aUrl*/, const QString& /*compa
 MegaUp::~MegaUp()
 {
     qDebug() << "     --- [Lib] {MegaUp}: destructor";
-//        Finally, you should shut WinSparkle down cleanly when the app exits:
 }
 
 void MegaUp::checkNow(const bool /*silent*/)
 {
-// Initialize WinSparkle as soon as the app itself is initialized, right
-// before entering the event loop:
     qDebug() << "     *** [Lib] {MegaUp}: check for updates";
 }
 

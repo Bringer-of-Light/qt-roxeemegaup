@@ -1,3 +1,7 @@
 Thin QT wrapper around Sparkle and WinSparkle primarily meant to be used in Roxee products.
 Licensed under BSD2.
-Contains Sparkle and WinSparkle code.
+Will build Sparkle binary, and does bundle WinSparkle binary.
+
+Some useful informations:
+- http://el-tramo.be/blog/mixing-cocoa-and-qt/
+

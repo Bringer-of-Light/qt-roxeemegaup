@@ -18,7 +18,7 @@ the underyling updater library, and ideally, be API independent from that librar
 Right now though, it only supports (and is meant for) Sparkle and WinSparkle.
 
 To compile:
-- build both sparkle and winsparkle, or use the provided bynaries
+- build both sparkle and winsparkle, or use the provided binaries (or rely on the bootstrap script to do the job)
 - edit the vars.pri file at the root of the project so that it matches your mileage:
  - ROXEE_DEPENDENCIES_DIR=# should point to wherever your lib and include folders reside (under which (Win)Sparkle can be found)
  - ROXEE_DESTDIR=# should point to wherever you want the library to be compiled
@@ -44,7 +44,7 @@ This code is distributed under the terms of the BSD license.
 #include "libroxeemegaup_global.h"
 #include <QtCore/qobject.h>
 
-/*! \namespace RoxeeTorrent
+/*! \namespace RoxeeMegaUp
 \brief The library namespace.
 */
 
@@ -72,6 +72,12 @@ namespace RoxeeMegaUp
         Q_PROPERTY(const QString ROXEE_BUILD READ getBuildType)
         /*! \brief The type of the library (static / dynamic).*/
         Q_PROPERTY(const QString ROXEE_LINK READ getLinkType)
+//        /*! \brief The name of the build host.*/
+//        Q_PROPERTY(const QString ROXEE_HOST READ getHost)
+//        /*! \brief Infos returned by the compiler at build time.*/
+//        Q_PROPERTY(const QString ROXEE_COMPILER READ getCompiler)
+        /*! \brief QT Version used to build.*/
+        Q_PROPERTY(const QString ROXEE_QT READ getQt)
 
         /*! \brief The nameof the underlying updater library.*/
         Q_PROPERTY(const QString PLUGIN_NAME READ getLibName)
@@ -89,6 +95,9 @@ namespace RoxeeMegaUp
 
         const QString getBuildType();
         const QString getLinkType();
+//        const QString getHost();
+//        const QString getCompiler();
+        const QString getQt();
 
         const QString getLibName();
         const QString getLibVersion();

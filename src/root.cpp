@@ -36,7 +36,6 @@ const QString Root::getRevision(){
 }
 
 const QString Root::getChangeset(){
-    Q_WS_MAC
     return VERSION_CHANGE;
 }
 

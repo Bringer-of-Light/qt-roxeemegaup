@@ -16,7 +16,13 @@ LIBS += -L$${DESTDIR}/../lib
 LIBS += -lroxeemegaup
 
 contains(ROXEE_LINK_TYPE, static){
-    QMAKE_LFLAGS += -F../third-party/Sparkle/
+    # If compiling statically
+    isEmpty(ROXEE_DESTDIR){
+        QMAKE_LFLAGS += -F../third-party/Sparkle/
+    }
+    !isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
+        QMAKE_LFLAGS += -F$${ADDITIONAL_DEPENDENCIES_DIR}
+    }
 }
 
 SOURCES += main.cpp

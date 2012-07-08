@@ -60,7 +60,7 @@ win32{
 mac{
     contains(ROXEE_LINK_TYPE, static){
         # If compiling statically
-        isEmpty(ROXEE_DESTDIR){zz
+        isEmpty(ROXEE_DESTDIR){
             QMAKE_LFLAGS += -F../third-party/Sparkle/
         }
         !isEmpty(ADDITIONAL_DEPENDENCIES_DIR){

@@ -29,6 +29,7 @@ MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& companyName
         const wchar_t * cn = companyName.toStdWString().c_str();
         const wchar_t * an = appName.toStdWString().c_str();
         const wchar_t * v = version.toStdWString().c_str();
+        qDebug() << "     *** [Lib] {MegaUp}: setting infos " << companyName << appName << version;
         win_sparkle_set_app_details(cn, an, v);
     }
     win_sparkle_init();
@@ -41,7 +42,7 @@ MegaUp::~MegaUp()
     win_sparkle_cleanup();
 }
 
-void MegaUp::checkNow(const bool silent)
+void MegaUp::checkNow(const bool /*silent*/)
 {
 // Initialize WinSparkle as soon as the app itself is initialized, right
 // before entering the event loop:
@@ -51,6 +52,7 @@ void MegaUp::checkNow(const bool silent)
 
 void MegaUp::setAutomatic(const bool val)
 {
+    qDebug() << "     *** [Lib] {MegaUp}: setting auto update" << val;
     win_sparkle_set_automatic_check_for_updates(val ? 1 : 0);
 }
 
@@ -61,6 +63,7 @@ bool MegaUp::getAutomatic()
 
 void MegaUp::setAutomaticInterval(const int seconds)
 {
+    qDebug() << "     *** [Lib] {MegaUp}: set interval to " << seconds;
     win_sparkle_set_update_check_interval(seconds);
 }
 

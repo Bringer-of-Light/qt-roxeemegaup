@@ -11,7 +11,7 @@
 
 #include "root.h"
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
 #include <winsparkle-version.h>
 #endif
 
@@ -60,9 +60,9 @@ const QString Root::getQt(){
 }
 
 const QString Root::getLibName(){
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC)
     return QString::fromAscii("sparkle");
-#elif Q_OS_WIN
+#elif defined(Q_OS_WIN)
     return QString::fromAscii("winsparkle");
 #else
     return QString::fromAscii("");
@@ -70,10 +70,10 @@ const QString Root::getLibName(){
 }
 
 const QString Root::getLibVersion(){
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC)
     // XXX should better read the info.plist
     return QString::fromAscii("1");
-#elif Q_OS_WIN
+#elif defined(Q_OS_WIN)
     return QString::number(WIN_SPARKLE_VERSION_MAJOR);
 #else
     return QString::fromAscii("");
@@ -81,10 +81,10 @@ const QString Root::getLibVersion(){
 }
 
 const QString Root::getLibRevision(){
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC)
     // XXX should better read the info.plist
     return QString::fromAscii("5b6");
-#elif Q_OS_WIN
+#elif defined(Q_OS_WIN)
     return QString::number(WIN_SPARKLE_VERSION_MINOR);
 #else
     return QString::fromAscii("");

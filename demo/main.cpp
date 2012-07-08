@@ -19,15 +19,16 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    RoxeeMegaUp::MegaUp * updater;
-    RoxeeMegaUp::Root * updaterRoot;
 
     QObject * r = new QObject;
     QString u = QString::fromAscii("http://app.roxee.net/webroxer/appcast.xml");
-    updater = new RoxeeMegaUp::MegaUp(r, u, updaterRoot->getVendor(), updaterRoot->getName(), updaterRoot->getVersion());
+    RoxeeMegaUp::Root * updaterRoot = new RoxeeMegaUp::Root();
+    RoxeeMegaUp::MegaUp * updater = new RoxeeMegaUp::MegaUp(r, u, updaterRoot->getVendor(), updaterRoot->getName(), updaterRoot->getVersion());
+
     updater->setAutomatic(true);
     updater->setAutomaticInterval(3600 * 24);
-    updaterRoot = new RoxeeMegaUp::Root();
+    // Check updates
+    // updater->checkNow();
 
     int a;
     a = app.exec();

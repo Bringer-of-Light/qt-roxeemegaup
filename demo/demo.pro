@@ -13,15 +13,59 @@ INCLUDEPATH += $$PWD
 INCLUDEPATH += ../src/include
 
 LIBS += -L$${DESTDIR}/../lib
-LIBS += -lroxeemegaup
 
 contains(ROXEE_LINK_TYPE, static){
-    # If compiling statically
-    isEmpty(ROXEE_DESTDIR){
-        QMAKE_LFLAGS += -F../third-party/Sparkle/
+    DEFINES += LIBROXEEMEGAUP_USE_STATIC
+}
+
+#win32{
+#    !contains(ROXEE_LINK_TYPE, static){
+##        win32-g++{
+##            LIBS += -lroxeemegaup
+##        }else{
+##        }
+#        LIBS += -lroxeemegaup0
+#    }else{
+#        LIBS += -lroxeemegaup
+#    }
+#}else{
+#    LIBS += -lroxeemegaup
+#}
+
+win32{
+# GCC
+    win32-g++{
+        LIBS += -lroxeemegaup
+    }else{
+# MSVC
+        contains(ROXEE_LINK_TYPE, static){
+#            DEFINES += LIBROXEEMEGAUP_LIBRARY_STATIC
+            LIBS += -lroxeemegaup
+        }else{
+            LIBS += -lroxeemegaup0
+        }
+
     }
-    !isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
-        QMAKE_LFLAGS += -F$${ADDITIONAL_DEPENDENCIES_DIR}
+
+#else{
+##            LIBS += -lroxeemegaup
+#    }
+}
+
+#win32{
+#    LIBS += -lroxeemegaup0
+#}else{
+#}
+
+mac{
+    contains(ROXEE_LINK_TYPE, static){
+        # If compiling statically
+        isEmpty(ROXEE_DESTDIR){zz
+            QMAKE_LFLAGS += -F../third-party/Sparkle/
+        }
+        !isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
+            QMAKE_LFLAGS += -F$${ADDITIONAL_DEPENDENCIES_DIR}
+        }
     }
 }
 

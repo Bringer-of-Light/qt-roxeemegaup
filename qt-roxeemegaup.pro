@@ -7,6 +7,7 @@ lessThan(QT_VERSION, 4.8) {
 TEMPLATE = subdirs
 CONFIG = ordered
 SUBDIRS = src demo
+# demo
 
 OTHER_FILES += vars.pri.in \
     res/doxygen.tpl \

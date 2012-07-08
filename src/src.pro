@@ -11,8 +11,14 @@ DEFINES += LIBROXEEMEGAUP_LIBRARY
 # Basic stuff (version and build/path magic)
 include(../conf/confbase.pri)
 
+contains(ROXEE_LINK_TYPE, static){
+    DEFINES += LIBROXEEMEGAUP_USE_STATIC
+}
+
 # Third-party stuff
-include(../third-party/bootstrap.pri)
+exists(../third-party/bootstrap.pri){
+    include(../third-party/bootstrap.pri)
+}
 
 # Windows specific configuration
 win32{

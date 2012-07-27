@@ -9,7 +9,7 @@
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "megaup.h"
+#include "libroxeemegaup/megaup.h"
 #include "cocoainit.h"
 
 #include <Cocoa/Cocoa.h>
@@ -23,6 +23,7 @@ class MegaUp::Private
 {
 	public:
 		SUUpdater* updater;
+//        CocoaInitializer * cinit;
 };
 
 MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& /*companyName*/, const QString& /*appName*/, const QString& /*version*/):
@@ -31,11 +32,11 @@ MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& /*companyNa
     qDebug() << "     +++ [Lib] {MegaUp}: constructor:" << aUrl;
 
     CocoaInitializer initializer;
-
     d = new Private;
 
-	d->updater = [SUUpdater sharedUpdater];
-	[d->updater retain];
+//    d->cinit = new CocoaInitializer();
+    d->updater = [SUUpdater sharedUpdater];
+    [d->updater retain];
 
     if(aUrl.length()){
         NSURL* url = [NSURL URLWithString:
@@ -52,13 +53,16 @@ MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& /*companyNa
     //- (void)setAutomaticallyDownloadsUpdates:(BOOL)automaticallyDownloadsUpdates;
     //- (BOOL)automaticallyDownloadsUpdates;
     [d->updater setAutomaticallyDownloadsUpdates: true];
+    qDebug() << "     +++                 done";
 }
 
 MegaUp::~MegaUp()
 {
     qDebug() << "     --- [Lib] {MegaUp}: destructor";
     [d->updater release];
+//    d->cinit->~CocoaInitializer();
 	delete d;
+    qDebug() << "     ---                 done";
 }
 
 void MegaUp::checkNow(const bool silent)
@@ -68,13 +72,16 @@ void MegaUp::checkNow(const bool silent)
         [d->updater checkForUpdatesInBackground];
     else
         [d->updater checkForUpdates: 0];
+    qDebug() << "     ***                 done";
 }
 
 
 void MegaUp::setAutomatic(const bool val)
 {
+    CocoaInitializer initializer;
     qDebug() << "     *** [Lib] {MegaUp}: set automatic update checking";
     [d->updater setAutomaticallyChecksForUpdates: val];
+    qDebug() << "     ***                 done";
 }
 
 bool MegaUp::getAutomatic()
@@ -84,8 +91,10 @@ bool MegaUp::getAutomatic()
 
 void MegaUp::setAutomaticInterval(const int seconds)
 {
+    CocoaInitializer initializer;
     qDebug() << "     *** [Lib] {MegaUp}: set automatic update time interval";
     [d->updater setUpdateCheckInterval: seconds];
+    qDebug() << "     ***                 done";
 }
 
 int MegaUp::getAutomaticInterval()

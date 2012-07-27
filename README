@@ -1,7 +1,12 @@
+================
+RoxeeMegaUp
+================
+
 Thin QT wrapper around Sparkle and WinSparkle primarily meant to be used in Roxee products.
-Licensed under BSD2.
 Will build Sparkle binary, and does bundle WinSparkle binary.
 
 Some useful informations:
 - http://el-tramo.be/blog/mixing-cocoa-and-qt/
+
+Licensed under BSD2.
 

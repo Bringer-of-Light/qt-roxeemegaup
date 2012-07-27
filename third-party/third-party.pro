@@ -1,7 +1,14 @@
-isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
-    message( -> Using internal third-party)
-    mac{
-        message( Building third-party )
+TEMPLATE = subdirs
+
+OTHER_FILES +=  $$PWD/README \
+                $$PWD/bootstrap.sh
+
+include($$PWD/../vars.pri)
+include($$PWD/../conf/confbase.pri)
+
+mac{
+    contains(ROXEE_THIRD_PARTY, internal){
+        message( -> Using internal third-party)
         system(./bootstrap.sh)
 #        system(./bootstrap.sh head)
         system(mkdir -p $${DESTDIR}/../Frameworks)

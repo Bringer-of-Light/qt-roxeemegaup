@@ -1,72 +1,73 @@
-include(../vars.pri)
+TEMPLATE = subdirs
+#include(../vars.pri)
 
-TARGET = DemoMegaUp
-TEMPLATE = app
-QT = core gui
+#TARGET = DemoMegaUp
+#TEMPLATE = app
+#QT = core gui
 
-include(../conf/confbase.pri)
+#include(../conf/confbase.pri)
 
-target.path = $$DESTDIR
-INSTALLS += target
+#target.path = $$DESTDIR
+#INSTALLS += target
 
-INCLUDEPATH += $$PWD
-INCLUDEPATH += ../src/include
+#INCLUDEPATH += $$PWD
+#INCLUDEPATH += ../src/include
 
-LIBS += -L$${DESTDIR}/../lib
+#LIBS += -L$${DESTDIR}/../lib
 
-contains(ROXEE_LINK_TYPE, static){
-    DEFINES += LIBROXEEMEGAUP_USE_STATIC
-}
+#contains(ROXEE_LINK_TYPE, static){
+#    DEFINES += LIBROXEEMEGAUP_USE_STATIC
+#}
+
+##win32{
+##    !contains(ROXEE_LINK_TYPE, static){
+###        win32-g++{
+###            LIBS += -lroxeemegaup
+###        }else{
+###        }
+##        LIBS += -lroxeemegaup0
+##    }else{
+##        LIBS += -lroxeemegaup
+##    }
+##}else{
+##    LIBS += -lroxeemegaup
+##}
 
 #win32{
-#    !contains(ROXEE_LINK_TYPE, static){
-##        win32-g++{
-##            LIBS += -lroxeemegaup
-##        }else{
-##        }
-#        LIBS += -lroxeemegaup0
-#    }else{
+## GCC
+#    win32-g++{
 #        LIBS += -lroxeemegaup
+#    }else{
+## MSVC
+#        contains(ROXEE_LINK_TYPE, static){
+##            DEFINES += LIBROXEEMEGAUP_LIBRARY_STATIC
+#            LIBS += -lroxeemegaup
+#        }else{
+#            LIBS += -lroxeemegaup0
+#        }
+
 #    }
-#}else{
-#    LIBS += -lroxeemegaup
+
+##else{
+###            LIBS += -lroxeemegaup
+##    }
 #}
 
-win32{
-# GCC
-    win32-g++{
-        LIBS += -lroxeemegaup
-    }else{
-# MSVC
-        contains(ROXEE_LINK_TYPE, static){
-#            DEFINES += LIBROXEEMEGAUP_LIBRARY_STATIC
-            LIBS += -lroxeemegaup
-        }else{
-            LIBS += -lroxeemegaup0
-        }
+##win32{
+##    LIBS += -lroxeemegaup0
+##}else{
+##}
 
-    }
-
-#else{
-##            LIBS += -lroxeemegaup
+#mac{
+#    contains(ROXEE_LINK_TYPE, static){
+#        # If compiling statically
+#        isEmpty(ROXEE_DESTDIR){
+#            QMAKE_LFLAGS += -F../third-party/Sparkle/
+#        }
+#        !isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
+#            QMAKE_LFLAGS += -F$${ADDITIONAL_DEPENDENCIES_DIR}
+#        }
 #    }
-}
-
-#win32{
-#    LIBS += -lroxeemegaup0
-#}else{
 #}
 
-mac{
-    contains(ROXEE_LINK_TYPE, static){
-        # If compiling statically
-        isEmpty(ROXEE_DESTDIR){
-            QMAKE_LFLAGS += -F../third-party/Sparkle/
-        }
-        !isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
-            QMAKE_LFLAGS += -F$${ADDITIONAL_DEPENDENCIES_DIR}
-        }
-    }
-}
-
-SOURCES += main.cpp
+#SOURCES += main.cpp

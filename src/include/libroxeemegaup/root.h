@@ -41,7 +41,7 @@ This code is distributed under the terms of the BSD license.
 #ifndef ROXEEMEGAUP_ROOT_H
 #define ROXEEMEGAUP_ROOT_H
 
-#include "libroxeemegaup_global.h"
+#include "libroxeemegaup/libroxeemegaup_global.h"
 #include <QtCore/qobject.h>
 
 /*! \namespace RoxeeMegaUp

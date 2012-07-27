@@ -1,65 +1,56 @@
-# Basic consumer variables
-include(../vars.pri)
-
-# Requires only core
+TEMPLATE = lib
 QT = core
 
-# Build a lib
-TEMPLATE = lib
-DEFINES += LIBROXEEMEGAUP_LIBRARY
-
-# Basic stuff (version and build/path magic)
-include(../conf/confbase.pri)
-
-contains(ROXEE_LINK_TYPE, static){
-    DEFINES += LIBROXEEMEGAUP_USE_STATIC
-}
-
-# Third-party stuff
-exists(../third-party/bootstrap.pri){
-    include(../third-party/bootstrap.pri)
-}
+include($$PWD/../vars.pri)
+include($$PWD/../conf/confbase.pri)
 
 # Windows specific configuration
 win32{
     message( -> Targetting windows)
-    include(../conf/confwin.pri)
+    include($$PWD/../conf/confwin.pri)
 }
 
 # Mac specific configuration
 mac{
     message( -> Targetting osx)
-    include(../conf/confmacx.pri)
+    include($$PWD/../conf/confmacx.pri)
 }
 
 # Unix specific configuration
 unix:!mac {
     message( -> Targetting *nux)
-    include(../conf/confunix.pri)
+    include($$PWD/../conf/confunix.pri)
+}
+
+DEFINES += LIBROXEEMEGAUP_LIBRARY
+
+contains(ROXEE_LINK_TYPE, static){
+    DEFINES += LIBROXEEMEGAUP_USE_STATIC
 }
 
 INCLUDEPATH += $$PWD
-INCLUDEPATH += $$PWD/include/libroxeemegaup
+INCLUDEPATH += $$PWD/include
 target.path = $$DESTDIR
 INSTALLS += target
 
-SOURCES +=  root.cpp
 
-HEADERS +=  include/libroxeemegaup/libroxeemegaup_global.h \
-            include/libroxeemegaup/root.h \
-            include/libroxeemegaup/megaup.h
+SOURCES +=  $$PWD/root.cpp
+
+HEADERS +=  $$PWD/include/libroxeemegaup/libroxeemegaup_global.h \
+            $$PWD/include/libroxeemegaup/root.h \
+            $$PWD/include/libroxeemegaup/megaup.h
 
 mac {
-    HEADERS +=              cocoainit.h
-    OBJECTIVE_SOURCES +=    cocoainit.mm
-    OBJECTIVE_SOURCES +=    megaup-mac.mm
+    HEADERS +=              $$PWD/mac/cocoainit.h
+    OBJECTIVE_SOURCES +=    $$PWD/mac/cocoainit.mm
+    OBJECTIVE_SOURCES +=    $$PWD/mac/megaup.mm
 }
 
 win32 {
-    SOURCES += megaup-win.cpp
+    SOURCES += $$PWD/win/megaup.cpp
 }
 
 !mac:!win32{
-    SOURCES += megaup-other.cpp
+    SOURCES += $$PWD/nux/megaup.cpp
 }
 

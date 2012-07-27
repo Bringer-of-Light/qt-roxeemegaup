@@ -12,7 +12,7 @@
 #ifndef ROXEEMEGAUP_MEGAUP_H
 #define ROXEEMEGAUP_MEGAUP_H
 
-#include "libroxeemegaup_global.h"
+#include "libroxeemegaup/libroxeemegaup_global.h"
 
 #include <QtCore/qobject.h>
 

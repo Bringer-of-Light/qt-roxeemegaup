@@ -1,6 +1,6 @@
-!isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
-    QMAKE_LFLAGS += -F$${ADDITIONAL_DEPENDENCIES_DIR}
-    INCLUDEPATH += $${ADDITIONAL_DEPENDENCIES_DIR}/Sparkle.framework/Headers
+!isEmpty(ROXEE_EXTERNAL){
+    QMAKE_LFLAGS += -F$${ROXEE_EXTERNAL}
+    INCLUDEPATH += $${ROXEE_EXTERNAL}/Sparkle.framework/Headers
 }
 
 # Pointing to third-party include and lib dirs, in case the external dep doesn't provide them

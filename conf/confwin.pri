@@ -1,4 +1,4 @@
-isEmpty(ADDITIONAL_DEPENDENCIES_DIR){
+isEmpty(ROXEE_EXTERNAL){
     LIBS += -L$${PWD}/../third-party/WinSparkle-git-20120613
     INCLUDEPATH += $${PWD}/../third-party/WinSparkle-git-20120613
 }

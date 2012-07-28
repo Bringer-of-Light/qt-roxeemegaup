@@ -22,7 +22,8 @@ download(){
 
 build(){
     cd ${SRC_DIR}
-    xcodebuild GCC_TREAT_WARNINGS_AS_ERRORS=NO -sdk macosx10.7 -project Sparkle.xcodeproj -configuration Release ARCHS=x86_64 ONLY_ACTIVE_ARCH=YES MACOSX_DEPLOYMENT_TARGET=10.6 GCC_VERSION=com.apple.compilers.llvmgcc42
+    xcodebuild -project Sparkle.xcodeproj -sdk macosx10.7 MACOSX_DEPLOYMENT_TARGET=10.6 -target Sparkle -configuration Release GCC_TREAT_WARNINGS_AS_ERRORS=NO ARCHS=x86_64 ONLY_ACTIVE_ARCH=YES
+    # FAILS on master for some reaso... GCC_VERSION=com.apple.compilers.llvmgcc42
     cd -
     rm -Rf ${BUILD_DIR}
     mv ${SRC_DIR}/build/Release ${BUILD_DIR}

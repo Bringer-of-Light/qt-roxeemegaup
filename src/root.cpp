@@ -61,33 +61,33 @@ const QString Root::getQt(){
 
 const QString Root::getLibName(){
 #if defined(Q_OS_MAC)
-    return QString::fromAscii("sparkle");
+    return QString::fromLatin1("sparkle");
 #elif defined(Q_OS_WIN)
-    return QString::fromAscii("winsparkle");
+    return QString::fromLatin1("winsparkle");
 #else
-    return QString::fromAscii("");
+    return QString::fromLatin1("");
 #endif
 }
 
 const QString Root::getLibVersion(){
 #if defined(Q_OS_MAC)
     // XXX should better read the info.plist
-    return QString::fromAscii("1");
+    return QString::fromLatin1("1");
 #elif defined(Q_OS_WIN)
     return QString::number(WIN_SPARKLE_VERSION_MAJOR);
 #else
-    return QString::fromAscii("");
+    return QString::fromLatin1("");
 #endif
 }
 
 const QString Root::getLibRevision(){
 #if defined(Q_OS_MAC)
     // XXX should better read the info.plist
-    return QString::fromAscii("5b6");
+    return QString::fromLatin1("5b6");
 #elif defined(Q_OS_WIN)
     return QString::number(WIN_SPARKLE_VERSION_MINOR);
 #else
-    return QString::fromAscii("");
+    return QString::fromLatin1("");
 #endif
 }
 

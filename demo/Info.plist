@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <!-- Confable -->
+    <key>CFBundleExecutable</key>
+    <string>roxeemegaup</string>
+    <key>CFBundleIconFile</key>
+    <string>main</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.roxee.roxeemegaup</string>
+    <key>CFBundleName</key>
+    <string>RoxeeMegaUp</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.7.0</string>
+    <key>CFBundleVersion</key>
+    <string>0.7.0</string>
+    <key>CFBundleSignature</key>
+    <string>ROXE</string>
+
+    <!-- Not confable by puke -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <!-- APPL for apps, FMWK for frameworks -->
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.6</string>
+
+    <!-- Sparkle -->
+    <key>SUPublicDSAKeyFile</key>
+    <string>dsa_pub.pem</string>
+    <key>SUFeedURL</key>
+    <string>https://domain/roxeemegaup/appcast.xml</string>
+    <key>SUEnableAutomaticChecks</key>
+    <string>YES</string>
+    <key>SUAllowsAutomaticUpdates</key>
+    <string>NO</string>
+    <key>SUEnableSystemProfiling</key>
+    <string>YES</string>
+
+  </dict>
+</plist>

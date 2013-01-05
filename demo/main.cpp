@@ -10,7 +10,7 @@
  */
 
 #include <QtCore/qdebug.h>
-#include <QtGui/qapplication.h>
+#include <QApplication>
 #include <libroxeemegaup/megaup.h>
 #include <libroxeemegaup/root.h>
 
@@ -19,9 +19,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-
     QObject * r = new QObject;
-    QString u = QString::fromAscii("http://app.roxee.net/webroxer/appcast.xml");
+    QString u = QString::fromLatin1("http://app.roxee.net/webroxer/appcast.xml");
     RoxeeMegaUp::Root * updaterRoot = new RoxeeMegaUp::Root();
     RoxeeMegaUp::MegaUp * updater = new RoxeeMegaUp::MegaUp(r, u, updaterRoot->getVendor(), updaterRoot->getName(), updaterRoot->getVersion());
 

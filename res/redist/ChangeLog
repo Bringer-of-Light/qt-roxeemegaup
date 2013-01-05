@@ -1,3 +1,8 @@
+RoxeeMegaUp-0.7.0-dev:
+    Build system cleanup.
+    Working demo.
+    QT5 support.
+
 RoxeeMegaUp-0.6.0:
     Build system synch.
     Version bump to stay synched with Roxee.

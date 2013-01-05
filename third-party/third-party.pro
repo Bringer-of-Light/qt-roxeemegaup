@@ -3,17 +3,18 @@ TEMPLATE = subdirs
 OTHER_FILES +=  $$PWD/README \
                 $$PWD/bootstrap.sh
 
-include($$PWD/../vars.pri)
-include($$PWD/../conf/confbase.pri)
+include($$PWD/../conf/conf.pri)
 
 mac{
-    contains(ROXEE_THIRD_PARTY, internal){
-        message( -> Using internal third-party)
+    !isEmpty(ROXEE_INTERNAL_VERSION){
+        message( -> Using internal third-party $${ROXEE_INTERNAL_VERSION})
 #        system(./bootstrap.sh)
-        system(./bootstrap.sh head)
+        system(./bootstrap.sh $$ROXEE_INTERNAL_VERSION)
         system(rm -Rf $${DESTDIR}/Frameworks/Sparkle.framework)
         system(mkdir -p $${DESTDIR}/Frameworks)
         # Only useful to dynamic libs at this place
-        system(cp -R $${PWD}/../third-party/Sparkle/Sparkle.framework $${DESTDIR}/Frameworks)
+        contains(ROXEE_LINK_TYPE, dynamic){
+            system(cp -R $${PWD}/../third-party/Sparkle/Sparkle.framework $${DESTDIR}/Frameworks)
+        }
     }
 }

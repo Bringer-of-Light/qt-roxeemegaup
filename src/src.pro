@@ -14,6 +14,13 @@ INCLUDEPATH += $$PWD/include
 target.path = $$DESTDIR
 INSTALLS += target
 
+# Copy headers to destination
+system(rm -Rf "$$DESTDIR/../include")
+system(mkdir -p "$$DESTDIR/../")
+system(cp -R "$$PWD/include" "$$DESTDIR/../")
+system(rm -Rf "$$DESTDIR/../share")
+system(mkdir -p "$$DESTDIR/../share/libroxeemegaup")
+system(cp "$$PWD/../res/redist/*" "$$DESTDIR/../share/libroxeemegaup")
 
 SOURCES +=  $$PWD/root.cpp
 
@@ -34,11 +41,3 @@ win32 {
 !mac:!win32{
     SOURCES += $$PWD/nux/megaup.cpp
 }
-
-# Copy headers to destination
-system(rm -Rf "$$DESTDIR/../include")
-system(mkdir -p "$$DESTDIR/../")
-system(cp -R "$$PWD/include" "$$DESTDIR/../")
-system(rm -Rf "$$DESTDIR/../share")
-system(mkdir -p "$$DESTDIR/../share/libroxeemegaup")
-system(cp "$$PWD/../res/redist/*" "$$DESTDIR/../share/libroxeemegaup")

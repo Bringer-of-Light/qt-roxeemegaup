@@ -1,7 +1,8 @@
-RoxeeMegaUp-0.7.0-dev:
+RoxeeMegaUp-0.7.0:
     Build system cleanup.
     Working demo.
     QT5 support.
+    Third-party script fixed.
 
 RoxeeMegaUp-0.6.0:
     Build system synch.

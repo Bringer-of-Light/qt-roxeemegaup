@@ -20,7 +20,7 @@ ROXEE_LINK_TYPE = dynamic
 
 # If you want to use the provided mechanism to fetch and link third-party dependencies, specify which version you want here
 # Otherwise, you must specify ROXEE_EXTERNAL (below)
-ROXEE_INTERNAL_VERSION = head
+ROXEE_INTERNAL_VERSION = stable #head
 ROXEE_INTERNAL_PATH =
 
 # Where to find additional dependencies (include and libs)

@@ -1,12 +1,13 @@
 #!/bin/sh
 
-if [[ "$1" != "" ]]; then
+if [[ "$1" == "head" ]]; then
     type=master
     SRC_DIR=SparkleMaster
     BUILD_DIR=Sparkle1.X
 else
     type=release
-    SRC_DIR=andymatuschak-Sparkle-9eb4368
+    SRC_DIR=Sparkle-sparkle-1.5b6
+#    andymatuschak-Sparkle-9eb4368
     BUILD_DIR=Sparkle1.5b6
 fi
 
@@ -14,7 +15,7 @@ download(){
     if [[ "$type" == "master" ]]; then
         git clone https://github.com/andymatuschak/Sparkle.git SparkleMaster
     else
-        curl https://nodeload.github.com/andymatuschak/Sparkle/tarball/sparkle-1.5b6 > temp.tar.gz
+        curl https://codeload.github.com/andymatuschak/Sparkle/tar.gz/sparkle-1.5b6 > temp.tar.gz
         tar -xzf temp.tar.gz
         rm temp.tar.gz
     fi

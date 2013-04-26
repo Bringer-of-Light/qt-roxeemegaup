@@ -22,7 +22,7 @@ class LIBROXEEMEGAUPSHARED_EXPORT MegaUp : public QObject
 {
     Q_OBJECT
     public:
-        MegaUp(QObject * parent, const QString& aUrl = NULL, const QString& companyName = NULL, const QString& appName = NULL, const QString& version = NULL);
+        MegaUp(QObject * parent = 0, const QString& aUrl = NULL, const QString& companyName = NULL, const QString& appName = NULL, const QString& version = NULL);
         ~MegaUp();
 
         Q_INVOKABLE void checkNow(const bool silent = true);

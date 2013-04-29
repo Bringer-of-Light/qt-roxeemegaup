@@ -16,7 +16,7 @@ contains(TEMPLATE, lib){
 
 mac{
     !isEmpty(ROXEE_EXTERNAL){
-        QMAKE_LFLAGS += -F$${ROXEE_EXTERNAL}
+        QMAKE_LFLAGS += -F$${ROXEE_EXTERNAL}/Frameworks/
         INCLUDEPATH += $${ROXEE_EXTERNAL}/Frameworks/Sparkle.framework/Headers
     }
 

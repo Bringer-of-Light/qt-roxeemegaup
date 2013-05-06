@@ -1,3 +1,7 @@
+RoxeeMegaUp-0.7.1:
+    Fixed windows build.
+    Update winsparkle.
+
 RoxeeMegaUp-0.7.0:
     Build system cleanup.
     Working demo.

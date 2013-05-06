@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     updater->setAutomatic(true);
     updater->setAutomaticInterval(3600 * 24);
     // Check updates
-    // updater->checkNow();
+     updater->checkNow();
 
     int a;
     a = app.exec();

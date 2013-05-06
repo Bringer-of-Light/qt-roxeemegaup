@@ -12,8 +12,44 @@ INCLUDEPATH += $$PWD
 target.path = $$DESTDIR
 INSTALLS += target
 
-OTHER_FILES += $$PWD/Info.plist
-QMAKE_INFO_PLIST = $${PWD}/Info.plist
+defineTest(copyToDestdir) {
+    files = $$1
+    dest = $$2
+
+    for(FILE, files) {
+        DDIR = $$dest
+
+        # Replace slashes in paths with backslashes for Windows
+        win32:FILE ~= s,/,\\,g
+        win32:DDIR ~= s,/,\\,g
+
+        win32{
+            system(mkdir $$quote($$DDIR))
+        }else{
+            system(mkdir -p $$quote($$DDIR))
+        }
+        message(********************************************)
+        message($$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t))
+        message(********************************************)
+
+        QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+    }
+
+    export(QMAKE_POST_LINK)
+}
+
+
+win32{
+    contains(ROXEE_LINK_TYPE, static){
+        DEFINES += LIBROXEEMEGAUP_USE_STATIC
+        copyToDestdir($$SPARK/WinSparkle.dll, $$DESTDIR)
+    }
+}
+
+mac {
+    OTHER_FILES += $$PWD/Info.plist
+    QMAKE_INFO_PLIST = $${PWD}/Info.plist
+}
 
 #TARGET = DemoMegaUp
 #TEMPLATE = app

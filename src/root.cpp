@@ -12,7 +12,7 @@
 #include "libroxeemegaup/root.h"
 
 #if defined(Q_OS_WIN)
-#include <winsparkle-version.h>
+#include "winsparkle-version.h"
 #endif
 
 /*! \cond */

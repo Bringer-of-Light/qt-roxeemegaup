@@ -1,17 +1,26 @@
 contains(TEMPLATE, app){
     INCLUDEPATH +=  $$DESTDIR/../include
     LIBS += -L$$DESTDIR/../lib
-    LIBS += -l$${TARGET}
+    win32{
+        contains(ROXEE_LINK_TYPE, static){
+            LIBS += -l$${TARGET}
+        }else{
+            LIBS += -l$${TARGET}0
+        }
+    }else{
+        LIBS += -l$${TARGET}
+    }
 }
+win32{
+    SPARK = $${PWD}/../third-party/WinSparkle-git-20130401
+}
+
 
 contains(TEMPLATE, lib){
     win32{
-#        !isEmpty(ROXEE_INTERNAL_VERSION){
-        LIBS += -L$${PWD}/../third-party/WinSparkle-git-20120613
-        INCLUDEPATH += $${PWD}/../third-party/WinSparkle-git-20120613
-#        }
+        INCLUDEPATH += $${SPARK}
+        LIBS += -L$${SPARK}
     }
-
 }
 
 mac{

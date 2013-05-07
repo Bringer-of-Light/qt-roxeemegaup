@@ -1,7 +1,7 @@
 TEMPLATE = lib
 QT = core
 
-include($$PWD/../conf/conf.pri)
+include($$PWD/../config/common.pri)
 
 DEFINES += LIBROXEEMEGAUP_LIBRARY
 
@@ -14,46 +14,22 @@ INCLUDEPATH += $$PWD/include
 target.path = $$DESTDIR
 INSTALLS += target
 
-
-
-defineTest(copyToDestdir) {
-    files = $$1
-    dest = $$2
-
-    for(FILE, files) {
-        DDIR = $$dest
-
-        # Replace slashes in paths with backslashes for Windows
-        win32:FILE ~= s,/,\\,g
-        win32:DDIR ~= s,/,\\,g
-
-        win32{
-            system(mkdir $$quote($$DDIR))
-        }else{
-            system(mkdir -p $$quote($$DDIR))
-        }
-        message(********************************************)
-        message($$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t))
-        message(********************************************)
-
-        QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-    }
-
-    export(QMAKE_POST_LINK)
-}
-
 copyToDestdir($$PWD/include/libroxeemegaup/*, $$DESTDIR/../include/libroxeemegaup)
 copyToDestdir($$PWD/../res/redist/*, $$DESTDIR/../share/libroxeemegaup)
 
-# XXX careful with that - if both directories are the same
-win32{
+!isEmpty(ROXEE_INTERNAL){
     contains(ROXEE_LINK_TYPE, dynamic){
-        copyToDestdir($$SPARK/WinSparkle.dll, $$DESTDIR)
-#        copyToDestdir($$ROXEE_EXTERNAL/lib/libvlccore.dll, $$DESTDIR)
-    #    copyToDestdir($$ROXEE_EXTERNAL/lib/plugins/*, $$DESTDIR/plugins)
+        message( -> Using internal third-party $${ROXEE_INTERNAL_VERSION})
+        win32{
+            copyToDestdir($$ROXEE_EXTERNAL/lib/WinSparkle.dll, $$DESTDIR)
+        }
+        mac{
+            system(rm -Rf $${DESTDIR}/../Frameworks/Sparkle.framework)
+            system(mkdir -p $${DESTDIR}/../Frameworks)
+            system(cp -R $${ROXEE_EXTERNAL}/Frameworks/Sparkle.framework $${DESTDIR}/../Frameworks)
+        }
     }
 }
-
 
 SOURCES +=  $$PWD/root.cpp
 

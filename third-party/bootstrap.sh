@@ -28,10 +28,10 @@ build(){
     cd -
     rm -Rf ${BUILD_DIR}
     mv ${SRC_DIR}/build/Release ${BUILD_DIR}
-    cp ${SRC_DIR}/generate_keys.rb ${BUILD_DIR}/../
-    cp ${SRC_DIR}/sign_update.rb ${BUILD_DIR}/../
-    chmod u+x ${BUILD_DIR}/../sign_update.rb
-    chmod u+x ${BUILD_DIR}/../generate_keys.rb
+#    cp ${SRC_DIR}/generate_keys.rb ${BUILD_DIR}/../
+#    cp ${SRC_DIR}/sign_update.rb ${BUILD_DIR}/../
+#    chmod u+x ${BUILD_DIR}/../sign_update.rb
+#    chmod u+x ${BUILD_DIR}/../generate_keys.rb
 }
 
 fixbuild(){
@@ -49,10 +49,9 @@ fixbuild(){
 }
 
 relink(){
-    if [[ -e Sparkle  ]]; then
-        rm Sparkle
-    fi
-    ln -s ${BUILD_DIR} Sparkle
+    rm -f sparkler-mac/Frameworks
+    mkdir -p sparkler-mac
+    ln -s `pwd`/${BUILD_DIR} sparkler-mac/Frameworks
 }
 
 

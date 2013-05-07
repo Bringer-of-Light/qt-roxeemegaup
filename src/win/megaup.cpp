@@ -26,11 +26,13 @@ MegaUp::MegaUp(QObject * parent, const QString& aUrl, const QString& companyName
     }
 
     if(companyName.length()){
-        const wchar_t * cn = companyName.toStdWString().c_str();
-        const wchar_t * an = appName.toStdWString().c_str();
-        const wchar_t * v = version.toStdWString().c_str();
-        qDebug() << "     *** [Lib] {MegaUp}: setting infos " << companyName << appName << version;
-        win_sparkle_set_app_details(cn, an, v);
+        if(companyName != ""){
+            const wchar_t * cn = companyName.toStdWString().c_str();
+            const wchar_t * an = appName.toStdWString().c_str();
+            const wchar_t * v = version.toStdWString().c_str();
+            qDebug() << "     *** [Lib] {MegaUp}: setting   infos " << (*cn) << (*an) << (*v);
+            win_sparkle_set_app_details(cn, an, v);
+        }
     }
     win_sparkle_init();
 }

@@ -13,6 +13,7 @@
 #include <QApplication>
 #include <libroxeemegaup/megaup.h>
 #include <libroxeemegaup/root.h>
+#include <QWidget>
 
 
 int main(int argc, char *argv[])
@@ -22,12 +23,15 @@ int main(int argc, char *argv[])
     QObject * r = new QObject;
     QString u = QString::fromLatin1("http://app.roxee.net/webroxer/appcast.xml");
     RoxeeMegaUp::Root * updaterRoot = new RoxeeMegaUp::Root();
-    RoxeeMegaUp::MegaUp * updater = new RoxeeMegaUp::MegaUp(r, u, updaterRoot->getVendor(), updaterRoot->getName(), updaterRoot->getVersion());
-
+    RoxeeMegaUp::MegaUp * updater = new RoxeeMegaUp::MegaUp(r, u, "", updaterRoot->getName(), updaterRoot->getVersion());
+// updaterRoot->getVendor()
     updater->setAutomatic(true);
     updater->setAutomaticInterval(3600 * 24);
     // Check updates
-     updater->checkNow();
+    updater->checkNow();
+
+    QWidget * t = new QWidget();
+    t->show();
 
     int a;
     a = app.exec();

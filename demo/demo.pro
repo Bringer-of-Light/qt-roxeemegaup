@@ -14,6 +14,9 @@ INSTALLS += target
 contains(ROXEE_LINK_TYPE, static){
     DEFINES += LIBROXEEMEGAUP_USE_STATIC
 
+    mac{
+        QMAKE_LFLAGS += -F$${ROXEE_EXTERNAL}/Frameworks
+    }
     !isEmpty(ROXEE_INTERNAL){
         message( -> Using internal third-party $${ROXEE_INTERNAL_VERSION})
         win32{

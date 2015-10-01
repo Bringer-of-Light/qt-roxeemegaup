@@ -59,9 +59,13 @@ contains(TEMPLATE, lib){
     # Linking against third-party libs if any
     !isEmpty(ROXEE_EXTERNAL){
         INCLUDEPATH += $${ROXEE_EXTERNAL}/include
-        LIBS += -L$${ROXEE_EXTERNAL}/lib
+        exists( $${ROXEE_EXTERNAL}/lib) {
+            LIBS += -L$${ROXEE_EXTERNAL}/lib
+        }
         mac{
-            QMAKE_LFLAGS += -F$${ROXEE_EXTERNAL}/Frameworks
+            exists( $${ROXEE_EXTERNAL}/Frameworks ) {
+                QMAKE_LFLAGS += -F$${ROXEE_EXTERNAL}/Frameworks
+            }
         }
         !isEmpty(ROXEE_INC){
             INCLUDEPATH += $${ROXEE_EXTERNAL}/$${ROXEE_INC}

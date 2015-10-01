@@ -5,11 +5,11 @@ SOURCES +=  $$PWD/main.cpp
 
 include($$PWD/../config/common.pri)
 
-LIBS += -l$${ROXEE_LINK_NAME}
-
 INCLUDEPATH += $$PWD
 target.path = $$DESTDIR
 INSTALLS += target
+
+LIBS += -l$${ROXEE_LINK_NAME}
 
 contains(ROXEE_LINK_TYPE, static){
     DEFINES += LIBROXEEMEGAUP_USE_STATIC
@@ -30,7 +30,6 @@ contains(ROXEE_LINK_TYPE, static){
         }
     }
 }
-
 
 mac {
     OTHER_FILES += $$PWD/Info.plist
